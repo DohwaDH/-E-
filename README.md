@@ -4,7 +4,7 @@ graph TB
     Actor((플레이어 / Actor))
 
     %% System Boundary
-    subgraph 게임 시스템 (System)
+    subgraph 게임시스템
         %% 메인 유스케이스
         U_Name["이름 입력"]
         U_Start["게임 시작"]
@@ -40,8 +40,7 @@ graph TB
         U_AppInfo["앱 정보 / 버전 정보"]
     end
 
-    %% External Systems
-    subgraph 구글 서비스 (External System)
+    subgraph 구글서비스
         Sys_Google["구글 로그인"]
         Sys_Data["데이터 저장"]
     end
@@ -74,7 +73,7 @@ graph TB
     U_SkinApply -.->|"<<include>>"| U_SkinAdd
 
     %% 칭호 상세 관계
-    U_Skin --> U_TitleEquip
+    U_Title --> U_TitleEquip
     U_Title --> U_TitleUnequip
     U_TitleUnequip -.->|"<<include>>"| U_TitleEquip
 
