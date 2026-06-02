@@ -1,4 +1,3 @@
-```mermaid
 graph TB
     %% UI 패키지
     subgraph UI_Package [App and UI Components]
@@ -29,14 +28,12 @@ graph TB
 
     %% 네이티브 안드로이드
     subgraph Android_Native [Android OS Native and Java]
-        J_Bridge["RewardedBridge / GoogleLogin (Java)"]
+        J_Bridge["RewardedBridge / GoogleLogin Java"]
     end
 
     %% 패키지 및 모듈 간 의존성 관계
     UI_Package --> Core_Package
     UI_Package --> System_Package
     UI_Package --> Mobile_Package
-    
     Mobile_Package --> System_Package
     Mobile_Package ..> Android_Native
-```
