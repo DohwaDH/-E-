@@ -1,0 +1,43 @@
+```mermaid
+subgraph OrdealDungeon_System [Ordeal Dungeon 패키지 구조]
+    %% UI 패키지
+    subgraph UI_Package [App & UI Components]
+        App[OrdealDungeonApp]
+        GameScr[GameScreen]
+        SkinShopScr[SkinShopScreen]
+    end
+
+    %% 게임 코어 로직 패키지
+    subgraph Core_Package [Game Core Data]
+        WeaponData[Weapon / Armor Pool]
+        FloorData[Floor / Enemy Data]
+        SkillData[Skill Info]
+    end
+
+    %% 외부 연동 및 유틸리티 패키지
+    subgraph System_Package [System Utilities]
+        SaveSys[Save / Option System]
+        BitsMgr[Bits / Ether Manager]
+        SkinMgr[Skin Manager]
+    end
+
+    %% 플랫폼 의존 패키지 (모바일용)
+    subgraph Mobile_Package [Mobile Platforms]
+        AdSys[Admob Ad System]
+        GoogleAuth[Google Auth System]
+    end
+
+    %% 네이티브 안드로이드 (코드 내에서 브릿지로 호출하는 Java 컴포넌트)
+    subgraph Android_Native [Android OS Native / Java]
+        J_Bridge["RewardedBridge / GoogleLogin (Java)"]
+    end
+
+    %% 패키지 및 모듈 간 의존성 관계 (Dependency)
+    UI_Package --> Core_Package : "데이터 참조"
+    UI_Package --> System_Package : "기능 제어 / 파일 입출력"
+    UI_Package --> Mobile_Package : "모바일 기능 요청"
+    
+    Mobile_Package --> System_Package : "에테르 재화 보상 부여"
+    Mobile_Package ..> Android_Native : "PyJnius (autoclass) 호출"
+end
+```
