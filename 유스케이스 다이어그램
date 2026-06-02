@@ -28,7 +28,7 @@ graph TB
         U_SkinApply["스킨 적용"]
         U_SkinExpand["스킨 상점 확장"]
         U_SkinAdd["스킨 추가"]
-        U_SkinInput["스킨 이름/이미지 URL 입력"]
+        U_SkinInput["스킨 이름 및 이미지 URL 입력"]
         U_SkinSave["스킨 저장"]
 
         %% 칭호 관련 상세 유스케이스
@@ -70,12 +70,12 @@ graph TB
     U_Skin --> U_SkinAdd
     U_SkinAdd --> U_SkinInput
     U_SkinInput --> U_SkinSave
-    U_SkinApply -.->|"<<include>>"| U_SkinAdd
+    U_SkinApply -->|include| U_SkinAdd
 
     %% 칭호 상세 관계
     U_Title --> U_TitleEquip
     U_Title --> U_TitleUnequip
-    U_TitleUnequip -.->|"<<include>>"| U_TitleEquip
+    U_TitleUnequip -->|include| U_TitleEquip
 
     %% 시스템 정보 및 스코어 상세 관계
     U_Score --> U_Leaderboard
@@ -84,5 +84,4 @@ graph TB
     %% 클라우드 시스템 연동 관계
     U_Backup --> Sys_Google
     Sys_Google --> Sys_Data
-    Sys_Data --> U_Load
-    ```
+    Sys_Data --> U_Load```
