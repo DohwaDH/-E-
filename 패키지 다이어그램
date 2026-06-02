@@ -1,41 +1,42 @@
 ```mermaid
 graph TB
-    %% UI 패키지
+    %% 1. UI 패키지 정의
     subgraph UI_Package [App and UI Components]
         App[OrdealDungeonApp]
         GameScr[GameScreen]
         SkinShopScr[SkinShopScreen]
     end
 
-    %% 게임 코어 로직 패키지
+    %% 2. 게임 코어 로직 패키지 정의
     subgraph Core_Package [Game Core Data]
         WeaponData[Weapon and Armor Pool]
         FloorData[Floor and Enemy Data]
         SkillData[Skill Info]
     end
 
-    %% 외부 연동 및 유틸리티 패키지
+    %% 3. 외부 연동 및 유틸리티 패키지 정의
     subgraph System_Package [System Utilities]
         SaveSys[Save and Option System]
         BitsMgr[Bits and Ether Manager]
         SkinMgr[Skin Manager]
     end
 
-    %% 플랫폼 의존 패키지 (모바일용)
+    %% 4. 플랫폼 의존 패키지 정의
     subgraph Mobile_Package [Mobile Platforms]
         AdSys[Admob Ad System]
         GoogleAuth[Google Auth System]
     end
 
-    %% 네이티브 안드로이드
+    %% 5. 네이티브 안드로이드 정의
     subgraph Android_Native [Android OS Native and Java]
-        J_Bridge["RewardedBridge / GoogleLogin Java"]
+        J_Bridge[RewardedBridge and GoogleLogin Java]
     end
 
-    %% 패키지 및 모듈 간 의존성 관계
-    UI_Package --> Core_Package
-    UI_Package --> System_Package
-    UI_Package --> Mobile_Package
-    Mobile_Package --> System_Package
-    Mobile_Package ..> Android_Native
+    %% [해결책] 패키지 내부의 대표 노드끼리 연결하여 간접적으로 패키지 간 의존성 표현
+    App --> WeaponData
+    App --> SaveSys
+    App --> AdSys
+    
+    AdSys --> BitsMgr
+    AdSys ..> J_Bridge
 ```
